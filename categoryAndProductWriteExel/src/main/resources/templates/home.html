@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="/bootstrap.min.css">
+</head>
+<body>
+
+<style>
+    .sidebar {
+        height: 100vh;
+    }
+</style>
+
+<style>
+    .list-group {
+        a {
+            text-decoration: none;
+        }
+    }
+</style>
+<a href="/file/download" class="btn btn-dark text-center text-primary offset-11">Download</a>
+<form action="/file" method="post" enctype="multipart/form-data">
+    <input name="file" type="file" class="btn btn-dark text-center text-primary">
+    <button type="submit">read file</button>
+</form>
+<div class="row">
+    <div class="col-3 sidebar bg-dark text-white">
+        <div class="card">
+            <ul class="list-group">
+                <a href="?">
+                    <li th:class="|text-dark list-group-item ${categoryID == null ? 'active' : ''}|">All Product</li>
+                </a>
+                <a th:href="|?categoryID=${category.id}|" th:each="category : ${categories}" class="text-dark">
+                    <li th:text="${category.name}"
+                        th:class="|list-group-item ${category.id == categoryID ? 'active' : ''}|"></li>
+                </a>
+            </ul>
+        </div>
+    </div>
+
+    <div class="col-9 p-2">
+        <div class="row">
+            <div>
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>Price</th>
+                        <th>Category</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="product : ${products}">
+                        <td th:text="${product.id}"></td>
+                        <td th:text="${product.name}"></td>
+                        <td th:text="${product.description}"></td>
+                        <td th:text="${product.price}"></td>
+                        <td th:text="${product.category.name}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    function file() {
+
+    }
+</script>
+</body>
+</html>
